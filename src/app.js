@@ -9,16 +9,17 @@ const PORT = 3001;
 const app = express();
 
 // Load routes
-const myRoute = require('./routes/mainRoutes');
+//const myRoute = require('./routes/mainRoutes');
 
 // Middleware
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Define routes
-app.use('/', myRoute);
+app.use("/", require(path.join(__dirname, "routes/mainRoutes")));
 
-app.get('/health', async (req, res) => {
+
+app.get('/', async (req, res) => {
     console.info("/health api called at", new Date().toISOString());
     res.status(200).send("Welcome to root URL of Server");
 });
